@@ -1,76 +1,129 @@
+// Function to clear all existing content from the meme, joke, quote, and riddle sections
 function clearAll() {
     const meme_div = document.querySelector("#d-1");
     const funny_div = document.querySelector("#d-2");
     const wisdom_div = document.querySelector("#d-3");
     const riddle_div = document.querySelector("#d-4");
-      meme_div.innerHTML = '';
-      funny_div.innerHTML = '';
-      wisdom_div.innerHTML = '';
-      riddle_div.innerHTML = '';
+
+    // Clear the innerHTML of each div to remove all existing content
+    meme_div.innerHTML = '';
+    funny_div.innerHTML = '';
+    wisdom_div.innerHTML = '';
+    riddle_div.innerHTML = '';
+}
+
+/**
+ * Displays a random programmer meme
+ */
+function showMeme() {
+    // Clear the meme section before displaying new content
+    clearAll();
     
-  }
-  
-  
-  function showMeme() {
+    // Get a random meme URL from the memes array
     const randomMemeUrl = getRandomData('memes');
-    const meme_div = document.querySelector("#d-1");
+    
+    // Create a new img element and set its src attribute to the random meme URL
     const meme_img = document.createElement('img');
     meme_img.setAttribute('src', randomMemeUrl);
-    clearAll();
+    
+    // Find the meme div element and append the new image to it
+    const meme_div = document.querySelector("#d-1");
     meme_div.appendChild(meme_img);
-  }
-  
-  
-  function showJoke() {
+}
+
+/**
+ * Displays a random joke
+ */
+function showJoke() {
+    // Clear the joke section before displaying new content
+    clearAll();
+    
+    // Get a random joke from the jokes array
     const randomJokeText = getRandomData('jokes');
-    const funny_div = document.querySelector("#d-2");
+    
+    // Create a new paragraph element and set its text content to the random joke
     const funny_string = document.createElement('p');
     funny_string.textContent = randomJokeText;
+    
+    // Find the funny div element and append the new paragraph to it
+    const funny_div = document.querySelector("#d-2");
+    funny_div.appendChild(funny_string);
+}
+
+/**
+ * Displays a random inspirational quote
+ */
+function showQuote() {
+    // Clear the quote section before displaying new content
     clearAll();
-    funny_div.appendChild(funny_string);  
-  }
-  
-  function showQuote() {
+    
+    // Get a random quote object from the quotes array
     const randomQuote = getRandomData('quotes');
-    const wisdom_div = document.querySelector("#d-3");
+    
+    // Create a new paragraph element
     const newP = document.createElement('p');
+    
+    // Set the text content of the paragraph to include the quote and author
     newP.textContent = randomQuote.quote + "\n" + " - " + randomQuote.author;
-    clearAll();
+    
+    // Find the wisdom div element and append the new paragraph to it
+    const wisdom_div = document.querySelector("#d-3");
     wisdom_div.appendChild(newP);
-  }
-  
-  
-  function showRiddle() {
+}
+
+/**
+ * Displays a random riddle
+ */
+function showRiddle() {
+    // Clear the riddle section before displaying new content
+    clearAll();
+    
+    // Get a random riddle object from the riddles array
     const randomRiddle = getRandomData('riddles');
-    const riddle_div = document.querySelector("#d-4");
+    
+    // Create a new paragraph for the question
     const new_riddle = document.createElement('p');
     new_riddle.textContent = randomRiddle.question;
+    
+    // Create a new paragraph for the answer
     const new_answer = document.createElement('p');
     new_answer.textContent = randomRiddle.answer;
-    new_answer.setAttribute('id', 'ans');
-    new_answer.hidden = true;
-    
-    clearAll();
+    new_answer.setAttribute('id', 'ans'); // Set an id for easy access later
+    new_answer.hidden = true; // Hide the answer initially
+
+    // Find the riddle div element and append both question and answer paragraphs
+    const riddle_div = document.querySelector("#d-4");
+    riddle_div.innerHTML = ''; // Clear the div before appending new content
     riddle_div.appendChild(new_riddle);
     riddle_div.appendChild(new_answer);
+}
+
+/**
+ * Reveal the answer to the current riddle
+ */
+function revealAnswers() {
+    // Find the riddle div element
+    const riddle_div = document.querySelector("#d-4");
     
-  }
-  
-  
-  function revealAnswers() {
-   const riddle_div = document.querySelector("#d-4");
-   const riddle_check = riddle_div.querySelector('p');
-   const answer_check = document.querySelector('#ans');
-    if(!riddle_check) {
-      alert('There is no riddle shown.')
+    // Find the paragraph containing the riddle question
+    const riddle_check = riddle_div.querySelector('p');
+    
+    // Find the hidden answer paragraph
+    const answer_check = document.querySelector('#ans');
+    
+    // Check if there's no riddle shown
+    if (!riddle_check) {
+        alert('There is no riddle shown.');
     }
-    else if(riddle_check && !answer_check.hidden) {
-      alert('Answer is already shown')
+    // Check if the answer is already visible
+    else if (riddle_check && !answer_check.hidden) {
+        alert('Answer is already shown');
     }
+    // If none of the above conditions are met, show the answer
     else {
-      answer_check.hidden = false;
+        answer_check.hidden = false;
     }
-  }
+}
   
   // Source: https://www.thecoderpedia.com/blog/programming-memes/, Reddit
   const memes = ['https://i.redd.it/a0v87gwzoge61.jpg', 'https://i.redd.it/q29egav34ee61.jpg', 'https://i.redd.it/iij16swxjie61.jpg', 'https://i.redd.it/vek7dm2hrge61.jpg', 'https://www.testbytes.net/wp-content/uploads/2019/06/Untitled-8.png', 'https://miro.medium.com/max/1000/0*Ua695vjzFHV6VNOX.png', 'https://pbs.twimg.com/media/EKkPagPXkAA__Qo.jpg', 'https://code-love.com/wp-content/uploads/2019/03/download.jpeg', 'https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Memes-Programmer-while-sleeping.jpg', 'https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Memes-Evolution-of-Memory-Storage-1024x996.jpg', 'https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Memes-Error-in-Code-896x1024.jpg', 'https://www.thecoderpedia.com/wp-content/uploads/2020/06/Coding-Meme-Code-Comments-be-Like-925x1024.jpg', 'https://www.thecoderpedia.com/wp-content/uploads/2020/06/Internet-Explorer-Joke-915x1024.jpg'];
@@ -105,13 +158,15 @@ function clearAll() {
   ];
   
   
-  function rn(len) {
+  // A little helper function to genrate a random number
+  function getRandumNumber(len) {
     return Math.floor(Math.random() * len);
   }
   
+  // An important function to get random data from the data object
   function getRandomData(type) {
     const items = data[type];
-    return items[rn(items.length)];
+    return items[getRandumNumber(items.length)];
   }
   
   const data = {
